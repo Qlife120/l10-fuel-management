@@ -46,7 +46,6 @@ async function handleResponse<T>(response: Response): Promise<T> {
 // GET
 
 export async function fetchEngines(): Promise<Engine[]> {
-  console.log("-----------");
   const response = await fetch(`${API_URL}${ENDPOINTS.GET_ENGINES}`, {
     headers: defaultHeaders,
     credentials: 'include'

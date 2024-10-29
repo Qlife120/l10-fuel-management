@@ -1,5 +1,6 @@
 import { Engine, Consumption } from '../types';
 import { ConsumptionGraphs } from '../components/ConsumptionGraphs';
+import { FilterGraph } from '../components/FilterGraph';
 
 interface GraphsPageProps {
   engines: Engine[];
@@ -17,6 +18,10 @@ export function GraphsPage({ engines, consumptions }: GraphsPageProps) {
       </div>
 
       <ConsumptionGraphs
+        engines={engines}
+        consumptions={consumptions}
+      />
+      <FilterGraph
         engines={engines}
         consumptions={consumptions}
       />

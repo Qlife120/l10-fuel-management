@@ -38,7 +38,7 @@ export function ConsumptionGraphs({ consumptions, engines }: ConsumptionGraphsPr
     const data = new Map<string, number>();
     
     consumptions.forEach((consumption) => {
-      const engine = engines.find(e => e.id === consumption.engineId);
+      const engine = engines.find(e => e.matricule === consumption.engineId);
       if (engine) {
         const currentAmount = data.get(engine.matricule) || 0;
         data.set(engine.matricule, currentAmount + consumption.amount);
