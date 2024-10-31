@@ -53,6 +53,18 @@ export function FilterGraph({ consumptions, engines }: FilterGraphProps) {
       
       {/* Filter Form Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <select
+          value={selectedMatricule || ''}
+          onChange={(e) => setSelectedMatricule(e.target.value || null)}
+          className="border rounded-md p-2 w-full"
+        >
+          <option value="">Select Engine Matricule</option>
+          {engines.map((engine) => (
+            <option key={engine.id} value={engine.id}>
+              {engine.matricule}
+            </option>
+          ))}
+        </select>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
@@ -69,18 +81,6 @@ export function FilterGraph({ consumptions, engines }: FilterGraphProps) {
           className="border rounded-md p-2 w-full"
           isClearable
         />
-        <select
-          value={selectedMatricule || ''}
-          onChange={(e) => setSelectedMatricule(e.target.value || null)}
-          className="border rounded-md p-2 w-full"
-        >
-          <option value="">Select Engine Matricule</option>
-          {engines.map((engine) => (
-            <option key={engine.id} value={engine.id}>
-              {engine.matricule}
-            </option>
-          ))}
-        </select>
       </div>
 
       {/* Chart and Total Consumption Card Section */}

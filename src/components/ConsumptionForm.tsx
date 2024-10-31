@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Engine, Consumption } from '../types';
+import {  CheckCircle, Info } from 'lucide-react';
 
 interface ConsumptionFormProps {
   engines: Engine[];
@@ -10,15 +11,31 @@ export function ConsumptionForm({ engines, onSubmit }: ConsumptionFormProps) {
   const [engineId, setEngineId] = useState('');
   const [amount, setAmount] = useState('');
   const [notes, setNotes] = useState('');
+  const [alertSeverity, setAlertSeverity] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const amountValue = Number(amount);
+    
+    // Check if the amount is null, negative, or not a number
+    if (!amount || isNaN(amountValue) || amountValue <= 0) {
+      setAlertSeverity("danger");
+      setTimeout(() => setAlertSeverity(null), 2500);
+      return; // Prevent form submission
+    }
+
     onSubmit({
       engineId,
-      amount: Number(amount),
+      amount: amountValue,
       date: new Date().toISOString(),
       notes,
     });
+
+    setAlertSeverity("success");
+    setTimeout(() => setAlertSeverity(null), 1500);
+
+    // Reset form fields
     setEngineId('');
     setAmount('');
     setNotes('');
@@ -42,7 +59,7 @@ export function ConsumptionForm({ engines, onSubmit }: ConsumptionFormProps) {
             <option value="">Select an engine</option>
             {engines.map((engine) => (
               <option key={engine.id} value={engine.id}>
-                {engine.matricule}  {engine.name}
+                {engine.matricule} {engine.name}
               </option>
             ))}
           </select>
@@ -80,6 +97,17 @@ export function ConsumptionForm({ engines, onSubmit }: ConsumptionFormProps) {
         >
           Add Consumption
         </button>
+        
+          {alertSeverity === 'success' && (
+            <div className="alert alert-success d-flex align-items-center gap-2" role="alert">
+              <CheckCircle/>An example success alert with an icon
+            </div>
+          )}
+          {alertSeverity === 'danger' && (
+            <div className="alert alert-danger d-flex align-items-center gap-2" role="alert">
+              <Info/>An example danger alert with an icon
+            </div>
+          )}
       </div>
     </form>
   );

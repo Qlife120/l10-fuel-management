@@ -16,15 +16,15 @@ export function GraphsPage({ engines, consumptions }: GraphsPageProps) {
           Analyze fuel consumption trends and patterns across engines and time periods.
         </p>
       </div>
-
+      <FilterGraph
+              engines={engines}
+              consumptions={consumptions}
+            />
       <ConsumptionGraphs
         engines={engines}
         consumptions={consumptions}
       />
-      <FilterGraph
-        engines={engines}
-        consumptions={consumptions}
-      />
+      
     </main>
   );
 }

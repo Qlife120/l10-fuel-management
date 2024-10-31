@@ -6,6 +6,7 @@ import { useEngines } from './hooks/useEngines';
 import { useConsumptions } from './hooks/useConsumptions';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { ErrorMessage } from './components/ErrorMessage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const { engines, loading: enginesLoading, error: enginesError, addEngine } = useEngines();
